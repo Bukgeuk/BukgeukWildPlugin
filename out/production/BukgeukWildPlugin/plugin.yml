@@ -1,0 +1,11 @@
+name: BukgeukWildPlugin
+main: kr.kro.bukgeukwild.BukgeukWild
+version: 1.0
+api-version: 1.15
+author: Bukgeuk_
+
+commands:
+  ranking:
+    description: 랭킹을 보여줍니다.
+  dev:
+    description: Developer Commands.
