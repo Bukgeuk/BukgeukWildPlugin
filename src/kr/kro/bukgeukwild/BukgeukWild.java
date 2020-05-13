@@ -30,7 +30,7 @@ public class BukgeukWild extends JavaPlugin implements CommandExecutor {
         public void run() {
             Bukkit.getOnlinePlayers().forEach(player -> {
                 Map.Data.get(player.getUniqueId()).addPlayTime(10);
-                player.sendMessage("" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "접속 시간 점수 +10");
+                player.sendMessage("" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "접속 시간 포인트 +10");
             });
         }
     };
@@ -42,7 +42,7 @@ public class BukgeukWild extends JavaPlugin implements CommandExecutor {
         ShapedRecipe r1 = new ShapedRecipe(k1, i1);
 
         r1.shape("GGG", "GAG", "GGG");
-        r1.setIngredient('G', Material.GOLD_NUGGET);
+        r1.setIngredient('G', Material.GOLD_INGOT);
         r1.setIngredient('A', Material.APPLE);
 
         Bukkit.addRecipe(r1);
@@ -53,7 +53,7 @@ public class BukgeukWild extends JavaPlugin implements CommandExecutor {
 
         r2.shape("GGG", "GAG", "GGG");
         r2.setIngredient('G', Material.GOLD_INGOT);
-        r2.setIngredient('A', Material.APPLE);
+        r2.setIngredient('A', Material.GOLDEN_APPLE);
 
         Bukkit.addRecipe(r2);
 
@@ -152,7 +152,7 @@ public class BukgeukWild extends JavaPlugin implements CommandExecutor {
         Map.Data = FileIO.ReadAll();
 
         getServer().getPluginManager().registerEvents(new ConnectEvent(), this);
-        getServer().getPluginManager().registerEvents(new PointEvent(), this);
+        getServer().getPluginManager().registerEvents(new PointEvent(this), this);
         getCommand("ranking").setExecutor(new RankingCommands());
         getCommand("dev").setExecutor(this);
 
@@ -187,7 +187,7 @@ public class BukgeukWild extends JavaPlugin implements CommandExecutor {
             Player p = (Player) sender;
             if(!p.isOp()) {
                 p.sendMessage(ChatColor.RED + "권한이 부족합니다.");
-                return false;
+                return true;
             }
         }
 
@@ -195,17 +195,49 @@ public class BukgeukWild extends JavaPlugin implements CommandExecutor {
             switch (args[0]) {
                 case "disable":
                     Disable();
-                    break;
+                    return true;
                 case "map":
                     Gson gson = new Gson();
                     String jsonStr = gson.toJson(Map.Data);
                     sender.sendMessage(jsonStr);
+                    return true;
+                case "score":
+                    if (args.length >= 5) {
+                        UUID UUID = null;
+                        for (Player p : Bukkit.getOnlinePlayers()) {
+                            if (p.getName().equals(args[2])) UUID = p.getUniqueId();
+                        }
+                        if (UUID == null) {
+                            sender.sendMessage(ChatColor.RED + args[2] + "님을 찾을 수 없습니다");
+                            return false;
+                        }
+                        switch (args[1].toLowerCase()) {
+                            case "add":
+                                if (args[3].toLowerCase().equals("wild")) Map.Data.get(UUID).addWildPoint(Long.parseLong(args[4]));
+                                else if (args[3].toLowerCase().equals("pvp")) Map.Data.get(UUID).addPvpPoint(Long.parseLong(args[4]));
+                                else if (args[3].toLowerCase().equals("playtime")) Map.Data.get(UUID).addPlayTime(Long.parseLong(args[4]));
+                                sender.sendMessage("Add " + args[4] + " points to " + args[2] + " (Type:\"" + args[3] + "\")");
+                                return true;
+                            case "sub":
+                                if (args[3].toLowerCase().equals("wild")) Map.Data.get(UUID).addWildPoint((-1) * Long.parseLong(args[4]));
+                                else if (args[3].toLowerCase().equals("pvp")) Map.Data.get(UUID).addPvpPoint((-1) * Long.parseLong(args[4]));
+                                else if (args[3].toLowerCase().equals("playtime")) Map.Data.get(UUID).addPlayTime((-1) * Long.parseLong(args[4]));
+                                sender.sendMessage("Remove " + args[4] + " points to " + args[2] + " (Type:\"" + args[3] + "\")");
+                                return true;
+                            case "set":
+                                if (args[3].toLowerCase().equals("wild")) Map.Data.get(UUID).setWildPoint(Long.parseLong(args[4]));
+                                else if (args[3].toLowerCase().equals("pvp")) Map.Data.get(UUID).setPvpPoint(Long.parseLong(args[4]));
+                                else if (args[3].toLowerCase().equals("playtime")) Map.Data.get(UUID).setPlayTime(Long.parseLong(args[4]));
+                                sender.sendMessage("Set " + args[2] + "'s points to " + args[4] + " (Type:\"" + args[3] + "\")");
+                                return true;
+                        }
+                    }
+                    sender.sendMessage(ChatColor.RED + "Usage : /dev score [ add | sub | set ] <Nickname> <type> <score>");
                     break;
                 default:
                     sender.sendMessage(ChatColor.RED + "Usage : /dev [ disable | map ]");
-                    break;
             }
         } else sender.sendMessage(ChatColor.RED + "Usage : /dev [ disable | map ]");
-        return false;
+        return true;
     }
 }

@@ -38,4 +38,8 @@ public class UserData implements Serializable {
     public void addWildPoint(long point) { this.WildPoint += point; }
     public void setNickname(String Nickname) { this.Nickname = Nickname; }
     public void setUUID(UUID UUID) { this.UUID = UUID; }
+
+    public void setPlayTime(long time) { this.PlayTime = time; }
+    public void setPvpPoint(long point) { this.pvpPoint = point; }
+    public void setWildPoint(long point) { this.WildPoint = point; }
 }
