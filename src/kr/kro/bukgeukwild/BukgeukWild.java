@@ -208,7 +208,7 @@ public class BukgeukWild extends JavaPlugin implements CommandExecutor {
                             if (p.getName().equals(args[2])) UUID = p.getUniqueId();
                         }
                         if (UUID == null) {
-                            sender.sendMessage(ChatColor.RED + args[2] + "님을 찾을 수 없습니다");
+                            sender.sendMessage(ChatColor.RED + "Can't find " + args[2]);
                             return false;
                         }
                         switch (args[1].toLowerCase()) {
@@ -234,10 +234,16 @@ public class BukgeukWild extends JavaPlugin implements CommandExecutor {
                     }
                     sender.sendMessage(ChatColor.RED + "Usage : /dev score [ add | sub | set ] <Nickname> <type> <score>");
                     break;
+                case "guide":
+                    if (sender instanceof Player) {
+                        Player p = (Player) sender;
+                        p.getInventory().addItem(GuideBook.getGuideBook());
+                    } else sender.sendMessage("Cannot use this command in console");
+                    break;
                 default:
-                    sender.sendMessage(ChatColor.RED + "Usage : /dev [ disable | map ]");
+                    sender.sendMessage(ChatColor.RED + "Usage : /dev [ disable | map | score | guide ]");
             }
-        } else sender.sendMessage(ChatColor.RED + "Usage : /dev [ disable | map ]");
+        } else sender.sendMessage(ChatColor.RED + "Usage : /dev [ disable | map | score | guide ]");
         return true;
     }
 }

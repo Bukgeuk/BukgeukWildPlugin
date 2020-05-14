@@ -24,6 +24,7 @@ public class ConnectEvent implements Listener {
             UserData data = new UserData(p.getName(), p.getUniqueId());
             FileIO.Write(data);
             Map.Data.put(p.getUniqueId(), data);
+            p.getInventory().addItem(GuideBook.getGuideBook());
         } else {
             UserData data = FileIO.Read(p.getUniqueId());
             if (data != null) Map.Data.put(p.getUniqueId(), data);

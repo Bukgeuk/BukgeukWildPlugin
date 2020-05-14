@@ -102,47 +102,6 @@ public class RankingCommands implements CommandExecutor {
             count++;
         }
 
-        /*int i = 1;
-        long previous = -1;
-        int previous_i = 1;
-        String msg = "";
-        boolean top = false;
-        for (UUID key : list.keySet()) {
-            if (i == 4) {
-                if (player.getUniqueId().equals(list.get(key).getUUID())) {
-                    player.sendMessage(i + ". " + ChatColor.BLUE + ChatColor.BOLD + list.get(key).getNickname() + "(You) " + ChatColor.RESET + formatter.format(list.get(key).getPlayTime()));
-                    break;
-                } else {
-                    player.sendMessage("...");
-                    if (top) return true;
-                    i++;
-                    continue;
-                }
-            }
-            msg = "";
-            if (previous == list.get(key).getPlayTime()) {
-                if (player.getUniqueId().equals(list.get(key).getUUID())) {
-                    top = true;
-                    msg += (previous_i + ". " + ChatColor.BLUE + ChatColor.BOLD + list.get(key).getNickname() + "(You)");
-                } else msg += previous_i + ". " + list.get(key).getNickname();
-
-                if (i < 4 ||(i > 4 && player.getUniqueId().equals(list.get(key).getUUID()))) player.sendMessage(msg + " " + ChatColor.RESET + formatter.format(list.get(key).getPlayTime()));
-                i++;
-            } else {
-                if (player.getUniqueId().equals(list.get(key).getUUID())) {
-                    top = true;
-                    msg += (i + ". " + ChatColor.BLUE + ChatColor.BOLD + list.get(key).getNickname() + "(You)");
-                } else if (i == 1) msg += (i + ". " + ChatColor.GOLD + ChatColor.BOLD + list.get(key).getNickname());
-                else msg += (i + ". " + list.get(key).getNickname());
-
-                if (i < 4 ||(i > 4 && player.getUniqueId().equals(list.get(key).getUUID()))) player.sendMessage(msg + " " + ChatColor.RESET + formatter.format(list.get(key).getPlayTime()));
-
-                previous = list.get(key).getPlayTime();
-                i++;
-                previous_i = i;
-            }
-        }*/
-
         return true;
     }
 
@@ -194,48 +153,6 @@ public class RankingCommands implements CommandExecutor {
 
             count++;
         }
-
-        /*int i = 1;
-        long previous = -1;
-        int previous_i = 1;
-        String msg = "";
-        boolean top = false;
-        for (UUID key : list.keySet()) {
-            if (i == 4) {
-                if (player.getUniqueId().equals(list.get(key).getUUID())) {
-                    player.sendMessage(i + ". " + ChatColor.BLUE + ChatColor.BOLD + list.get(key).getNickname() + "(You) " + ChatColor.RESET + formatter.format(list.get(key).getWildPoint()));
-                    if (list.size() > 4) player.sendMessage("...");
-                    break;
-                } else {
-                    player.sendMessage("...");
-                    if (top) return true;
-                    i++;
-                    continue;
-                }
-            }
-            msg = "";
-            if (previous == list.get(key).getWildPoint()) {
-                if (player.getUniqueId().equals(list.get(key).getUUID())) {
-                    top = true;
-                    msg += (previous_i + ". " + ChatColor.BLUE + ChatColor.BOLD + list.get(key).getNickname() + "(You)");
-                } else msg += previous_i + ". " + list.get(key).getNickname();
-
-                if (i < 4 ||(i > 4 && player.getUniqueId().equals(list.get(key).getUUID()))) player.sendMessage(msg + " " + ChatColor.RESET + formatter.format(list.get(key).getWildPoint()));
-                i++;
-            } else {
-                if (player.getUniqueId().equals(list.get(key).getUUID())) {
-                    top = true;
-                    msg += (i + ". " + ChatColor.BLUE + ChatColor.BOLD + list.get(key).getNickname() + "(You)");
-                } else if (i == 1) msg += (i + ". " + ChatColor.GOLD + ChatColor.BOLD + list.get(key).getNickname());
-                else msg += (i + ". " + list.get(key).getNickname());
-
-                if (i < 4 ||(i > 4 && player.getUniqueId().equals(list.get(key).getUUID()))) player.sendMessage(msg + " " + ChatColor.RESET + formatter.format(list.get(key).getWildPoint()));
-
-                previous = list.get(key).getWildPoint();
-                i++;
-                previous_i = i;
-            }
-        }*/
         
         return true;
     }
@@ -288,47 +205,6 @@ public class RankingCommands implements CommandExecutor {
 
             count++;
         }
-
-        /*int i = 1;
-        long previous = -1;
-        int previous_i = 1;
-        String msg = "";
-        boolean top = false;
-        for (UUID key : list.keySet()) {
-            if (i == 4) {
-                if (player.getUniqueId().equals(list.get(key).getUUID())) {
-                    top = true;
-                    player.sendMessage(i + ". " + ChatColor.BLUE + ChatColor.BOLD + list.get(key).getNickname() + "(You) " + ChatColor.RESET + formatter.format(list.get(key).getPvpPoint()));
-                    break;
-                } else {
-                    player.sendMessage("...");
-                    if (top) return true;
-                    i++;
-                    continue;
-                }
-            }
-            msg = "";
-            if (previous == list.get(key).getPvpPoint()) {
-                if (player.getUniqueId().equals(list.get(key).getUUID())) {
-                    msg += (previous_i + ". " + ChatColor.BLUE + ChatColor.BOLD + list.get(key).getNickname() + "(You)");
-                } else msg += previous_i + ". " + list.get(key).getNickname();
-
-                if (i < 4 ||(i > 4 && player.getUniqueId().equals(list.get(key).getUUID()))) player.sendMessage(msg + " " + ChatColor.RESET + formatter.format(list.get(key).getPvpPoint()));
-                i++;
-            } else {
-                if (player.getUniqueId().equals(list.get(key).getUUID())) {
-                    top = true;
-                    msg += (i + ". " + ChatColor.BLUE + ChatColor.BOLD + list.get(key).getNickname() + "(You)");
-                } else if (i == 1) msg += (i + ". " + ChatColor.GOLD + ChatColor.BOLD + list.get(key).getNickname());
-                else msg += (i + ". " + list.get(key).getNickname());
-
-                if (i < 4 ||(i > 4 && player.getUniqueId().equals(list.get(key).getUUID()))) player.sendMessage(msg + " " + ChatColor.RESET + formatter.format(list.get(key).getPvpPoint()));
-
-                previous = list.get(key).getPvpPoint();
-                i++;
-                previous_i = i;
-            }
-        }*/
         
         return true;
     }
