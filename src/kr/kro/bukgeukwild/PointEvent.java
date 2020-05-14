@@ -362,7 +362,7 @@ public class PointEvent implements Listener {
                 break;
             case LAPIS_ORE:
                 m = p.getInventory().getItemInMainHand().getType();
-                if (m.equals(Material.IRON_PICKAXE) || m.equals(Material.DIAMOND_PICKAXE)) {
+                if (m.equals(Material.IRON_PICKAXE) || m.equals(Material.DIAMOND_PICKAXE) ||  m.equals(Material.STONE_PICKAXE)) {
                     if (!p.getInventory().getItemInMainHand().containsEnchantment(Enchantment.SILK_TOUCH)) {
                         p.sendMessage("" + ChatColor.GREEN + ChatColor.BOLD + "청금석 원석 채굴 :");
                         p.sendMessage("" + ChatColor.DARK_GREEN + ChatColor.BOLD + "    야생 포인트 +50");
@@ -373,7 +373,7 @@ public class PointEvent implements Listener {
                 break;
             case NETHER_QUARTZ_ORE:
                 m = p.getInventory().getItemInMainHand().getType();
-                if (m.equals(Material.IRON_PICKAXE) || m.equals(Material.DIAMOND_PICKAXE)) {
+                if (m.equals(Material.IRON_PICKAXE) || m.equals(Material.DIAMOND_PICKAXE) || m.equals(Material.WOODEN_PICKAXE) || m.equals(Material.STONE_PICKAXE) || m.equals(Material.GOLDEN_PICKAXE)) {
                     if (!p.getInventory().getItemInMainHand().containsEnchantment(Enchantment.SILK_TOUCH)) {
                         p.sendMessage("" + ChatColor.GREEN + ChatColor.BOLD + "네더 석영 원석 채굴 :");
                         p.sendMessage("" + ChatColor.DARK_GREEN + ChatColor.BOLD + "    야생 포인트 +30");
@@ -382,9 +382,20 @@ public class PointEvent implements Listener {
                 } else
                     e.setDropItems(false);
                 break;
-            case COAL_ORE: case REDSTONE_ORE:
+            case REDSTONE_ORE:
                 m = p.getInventory().getItemInMainHand().getType();
                 if (m.equals(Material.IRON_PICKAXE) || m.equals(Material.DIAMOND_PICKAXE)) {
+                    if (!p.getInventory().getItemInMainHand().containsEnchantment(Enchantment.SILK_TOUCH)) {
+                        p.sendMessage("" + ChatColor.GREEN + ChatColor.BOLD + "레드스톤 원석 채굴 :");
+                        p.sendMessage("" + ChatColor.DARK_GREEN + ChatColor.BOLD + "    야생 포인트 +15");
+                        Map.Data.get(p.getUniqueId()).addWildPoint(15);
+                    }
+                } else
+                    e.setDropItems(false);
+                break;
+            case COAL_ORE:
+                m = p.getInventory().getItemInMainHand().getType();
+                if (m.equals(Material.IRON_PICKAXE) || m.equals(Material.DIAMOND_PICKAXE) || m.equals(Material.WOODEN_PICKAXE) || m.equals(Material.STONE_PICKAXE) || m.equals(Material.GOLDEN_PICKAXE)) {
                     if (!p.getInventory().getItemInMainHand().containsEnchantment(Enchantment.SILK_TOUCH)) {
                         p.sendMessage("" + ChatColor.GREEN + ChatColor.BOLD + getKoreanNameByBlockType(e.getBlock().getType()) + " 채굴 :");
                         p.sendMessage("" + ChatColor.DARK_GREEN + ChatColor.BOLD + "    야생 포인트 +15");
